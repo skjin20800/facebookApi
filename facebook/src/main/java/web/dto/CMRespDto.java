@@ -15,6 +15,11 @@ public class CMRespDto<T> {
 		this.statusCode = statusCode;
 		this.data = data;
 	}
+	
+	public CMRespDto(int statusCode, String msg) {
+		this.statusCode = statusCode;
+		this.msg = msg;
+	}
 
 	public String getMsg() {
 		return msg;

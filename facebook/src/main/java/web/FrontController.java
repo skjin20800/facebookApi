@@ -1,7 +1,6 @@
 package web;
 
-import anno.RequestMapping;
-import domain.user.User;
+import anno.GetMapping;
 import service.UserService;
 import web.dto.CMRespDto;
 import web.dto.JoinReqDto;
@@ -14,12 +13,12 @@ public class FrontController<T> {
         super();
     }
     
-	@RequestMapping("/joinReq")
+	@GetMapping("/joinReq")
 	public CMRespDto<?> join(JoinReqDto dto) {
 		System.out.println("회원가입실행"+dto);
-		User user = userService.회원가입(dto);
-
-		return new CMRespDto<>(1,"실행됨");
+		int result = userService.회원가입(dto);
+		
+		return new CMRespDto<>(result,"회원가입 완료");
 	}
 
 

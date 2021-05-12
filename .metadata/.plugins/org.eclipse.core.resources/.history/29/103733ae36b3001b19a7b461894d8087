@@ -1,0 +1,37 @@
+package web;
+
+import anno.RequestMapping;
+import domain.user.User;
+import service.UserService;
+import web.dto.CMRespDto;
+import web.dto.JoinReqDto;
+
+public class FrontController<T> {
+	
+	UserService userService = new UserService();
+	
+    public FrontController() {
+        super();
+    }
+    
+	@RequestMapping("/joinReq")
+	public CMRespDto<?> join(JoinReqDto dto) {
+		System.out.println("회원가입실행"+dto);
+//		User user = userService.회원가입(dto);
+		User user = new User();
+		user.setAge(5);
+		user.setCreateDate(null);
+		user.setId(1);
+		user.setNickname("test");
+		user.setPassword("1234");
+		user.setUsername("test2");
+		
+		return new CMRespDto<>(1,user);
+	}
+
+
+
+
+	
+	
+}

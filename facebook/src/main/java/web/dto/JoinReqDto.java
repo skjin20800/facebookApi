@@ -7,6 +7,7 @@ public class JoinReqDto {
 	private String password;
 	private String nickname;
 	private int age;
+	
 	public int getId() {
 		return id;
 	}
