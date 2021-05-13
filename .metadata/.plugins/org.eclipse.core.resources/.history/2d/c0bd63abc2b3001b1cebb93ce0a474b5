@@ -6,6 +6,7 @@ import anno.GetMapping;
 import domain.user.User;
 import service.UserService;
 import web.dto.CMRespDto;
+import web.dto.UserInfoReqDto;
 
 public class GetController<T> {
 	

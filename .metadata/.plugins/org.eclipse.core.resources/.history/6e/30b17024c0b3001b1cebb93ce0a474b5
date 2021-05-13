@@ -17,11 +17,6 @@ public class UserService {
 
 		return userDao.findByUsernameAndPassword(dto);
 	}
-	
-	public User 회원정보(String Username) {
-
-		return userDao.findByUsername(Username);
-	}
 
 
 

@@ -149,7 +149,10 @@ public class Dispatcher implements Filter {
 					Parameter[] params = method.getParameters();
 					String path = null;
 					if (params.length != 0) {
-						cmRespDto = (CMRespDto<?>) method.invoke(getController, request);
+						// 해당 dtoInstance를 리플렉션해서 set함수 호출(username, password)
+						Object dtoInstance = params[0].getType().newInstance();
+						setData(dtoInstance, request); // request에서 적용할 setter값을 전부 dtoInstance에 넣어 DTO로 전달한다.
+						cmRespDto = (CMRespDto<?>) method.invoke(getController, dtoInstance);
 					} else {
 						cmRespDto = (CMRespDto<?>) method.invoke(getController);
 					}
@@ -157,6 +160,7 @@ public class Dispatcher implements Filter {
 					out.print("{ \"statuscode\": " + cmRespDto.getStatusCode() + ", ");
 					out.print("\n\"Message\": \"" + cmRespDto.getMsg() + "\", ");
 					out.print("\n\"Data\": \"" + cmRespDto.getData() + "\"} ");
+
 					out.flush();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -176,7 +180,9 @@ public class Dispatcher implements Filter {
 			Annotation annotation = method.getDeclaredAnnotation(PostMapping.class);
 			PostMapping postMapping = (PostMapping) annotation;
 			
-			//POST요청
+
+			
+			//일반 GET요청
 			if (postMapping.value().equals(endPoint)) {
 				CMRespDto<?> cmRespDto = null;
 				try {
@@ -191,6 +197,7 @@ public class Dispatcher implements Filter {
 						cmRespDto = (CMRespDto<?>) method.invoke(postController);
 					}
 					
+
 					if(postMapping.value().equals("/login")) {//로그인
 						HttpSession session = request.getSession();
 						session.setAttribute("session", cmRespDto.getData()); 

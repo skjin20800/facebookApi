@@ -366,3 +366,14 @@
 127.0.0.1 - - [13/May/2021:16:44:12 +0900] "GET / HTTP/1.1" 404 807
 0:0:0:0:0:0:0:1 - - [13/May/2021:16:44:13 +0900] "GET /facebook/ HTTP/1.1" 200 -
 0:0:0:0:0:0:0:1 - - [13/May/2021:16:44:25 +0900] "POST /facebook/login HTTP/1.1" 200 174
+127.0.0.1 - - [13/May/2021:16:59:01 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [13/May/2021:16:59:01 +0900] "GET /facebook/ HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - - [13/May/2021:16:59:35 +0900] "POST /facebook/userInfo HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - - [13/May/2021:16:59:45 +0900] "GET /facebook/userInfo HTTP/1.1" 200 174
+127.0.0.1 - - [13/May/2021:17:11:00 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [13/May/2021:17:11:01 +0900] "GET /facebook/ HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - - [13/May/2021:17:11:27 +0900] "GET /facebook/user HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - - [13/May/2021:17:11:36 +0900] "GET /facebook/userInfo?username=test1 HTTP/1.1" 200 174
+0:0:0:0:0:0:0:1 - - [13/May/2021:17:11:46 +0900] "GET /facebook/userInfo?username=test HTTP/1.1" 200 76
+0:0:0:0:0:0:0:1 - - [13/May/2021:17:11:48 +0900] "GET /facebook/userInfo?username=test4 HTTP/1.1" 200 76
+0:0:0:0:0:0:0:1 - - [13/May/2021:17:11:51 +0900] "GET /facebook/userInfo?username=test1 HTTP/1.1" 200 174
