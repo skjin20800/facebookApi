@@ -15,10 +15,14 @@ public class FrontController<T> {
     
 	@GetMapping("/joinReq")
 	public CMRespDto<?> join(JoinReqDto dto) {
-		System.out.println("회원가입실행"+dto);
 		int result = userService.회원가입(dto);
 		
-		return new CMRespDto<>(result,"회원가입 완료");
+		if(result ==1) {
+			return new CMRespDto<>(result,"join complete");	
+		}else {
+			return new CMRespDto<>(-1,"join fail");
+		}
+		
 	}
 
 
