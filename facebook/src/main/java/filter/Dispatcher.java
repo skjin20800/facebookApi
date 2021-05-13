@@ -15,11 +15,13 @@ import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import anno.GetMapping;
 import anno.PostMapping;
@@ -50,6 +52,8 @@ public class Dispatcher implements Filter {
 			GetController getController = new GetController();
 			Method[] methods = getController.getClass().getDeclaredMethods();
 
+
+						
 			get(methods, endPoint, getController, request, response);
 
 		} else if (request.getMethod().equals("POST")) {
@@ -61,6 +65,8 @@ public class Dispatcher implements Filter {
 
 	}
 
+
+	
 	private <T> void setData(T dtoInstance, HttpServletRequest request) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		String input = "";
@@ -173,6 +179,10 @@ public class Dispatcher implements Filter {
 		for (Method method : methods) {
 			Annotation annotation = method.getDeclaredAnnotation(PostMapping.class);
 			PostMapping postMapping = (PostMapping) annotation;
+			
+
+			
+			//일반 GET요청
 			if (postMapping.value().equals(endPoint)) {
 				CMRespDto<?> cmRespDto = null;
 				try {
@@ -186,6 +196,17 @@ public class Dispatcher implements Filter {
 					} else {
 						cmRespDto = (CMRespDto<?>) method.invoke(postController);
 					}
+					
+
+					if(postMapping.value().equals("/login")) {//로그인
+						HttpSession session = request.getSession();
+						session.setAttribute("session", cmRespDto.getData()); 
+						System.out.println(session.getAttribute("session")); //세션 확인
+					}else if(postMapping.value().equals("/logout")) { //로그아웃
+						HttpSession session = request.getSession();
+						session.invalidate();		
+					}
+					
 					PrintWriter out = response.getWriter();
 					out.print("{ \"statuscode\": " + cmRespDto.getStatusCode() + ", ");
 					out.print("\n\"Message\": \"" + cmRespDto.getMsg() + "\", ");
@@ -197,6 +218,8 @@ public class Dispatcher implements Filter {
 				}
 				break;
 			}
+			
+			
 
 		}
 

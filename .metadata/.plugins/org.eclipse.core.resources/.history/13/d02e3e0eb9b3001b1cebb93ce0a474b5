@@ -1,0 +1,42 @@
+package web;
+
+import anno.PostMapping;
+import domain.user.User;
+import service.UserService;
+import web.dto.CMRespDto;
+import web.dto.JoinReqDto;
+import web.dto.LoginReqDto;
+
+public class PostController<T> {
+	
+	UserService userService = new UserService();
+	
+    public PostController() {
+        super();
+    }
+
+	@PostMapping("/join")
+	public CMRespDto<?> join(JoinReqDto dto) {
+		int result = userService.회원가입(dto);
+		
+		if(result ==1) {
+			return new CMRespDto<>(result,"join complete");	
+		}else {
+			return new CMRespDto<>(-1,"join fail");
+		}
+	}
+	
+	@PostMapping("/login")
+	public CMRespDto<?> login(LoginReqDto dto) {
+		int result = 0;
+		User user = userService.로그인(dto);
+		
+		if(user != null) {
+			return new CMRespDto<>(1,"login complete",user);
+		}else {
+			return new CMRespDto<>(-1,"login fail",user);
+				}		
+		}
+	}
+
+

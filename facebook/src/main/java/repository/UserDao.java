@@ -2,9 +2,12 @@ package repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import config.DBConn;
+import domain.user.User;
 import web.dto.JoinReqDto;
+import web.dto.LoginReqDto;
 
 public class UserDao {
 
@@ -33,8 +36,35 @@ public class UserDao {
 		return -1;
 	}
 	
-	public void findById() {//회원정보보기
+	public User findByUsernameAndPassword(LoginReqDto dto) {
+		String sql = "SELECT id, username, password, nickname, age, createDate FROM user WHERE username = ? AND password = ?";
+		Connection conn = DBConn.getInstance();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getUsername());
+			pstmt.setString(2, dto.getPassword());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				User user = User.builder()
+				.id(rs.getInt("id"))
+				.username(rs.getString("username"))
+				.nickname(rs.getString("nickname"))
+				.age(rs.getInt("age"))
+				.createDate(rs.getTimestamp("createDate"));
+										
+				return user;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConn.close(conn,pstmt,rs);
+		}
+		
+		return null;
 	}
 	
 }

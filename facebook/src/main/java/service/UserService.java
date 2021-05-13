@@ -3,6 +3,7 @@ package service;
 import domain.user.User;
 import repository.UserDao;
 import web.dto.JoinReqDto;
+import web.dto.LoginReqDto;
 
 public class UserService {
 
@@ -12,9 +13,9 @@ public class UserService {
 		return userDao.save(dto);
 	}
 	
-	public User 로그인() {
+	public User 로그인(LoginReqDto dto) {
 
-		return null;
+		return userDao.findByUsernameAndPassword(dto);
 	}
 
 

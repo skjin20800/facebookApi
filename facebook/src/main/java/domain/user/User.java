@@ -48,5 +48,46 @@ public class User {
 		this.age = age;
 	}
 	
+	public static User builder() {
+		return new User();
+	}
+	
+	public User id(int id) {
+		this.id = id;
+		return this;
+	}
+	
+	public User username (String username) {
+		this.username = username;
+		return this;
+	}
+	
+	public User password (String password) {
+		this.password = password;
+		return this;
+	}
+	
+	public User nickname (String nickname) {
+		this.nickname = nickname;
+		return this;
+	}
+	
+	public User age (int age) {
+		this.age = age;
+		return this;
+	}
+	
+	public User createDate (Timestamp createDate) {
+		this.createDate = createDate;
+		return this;
+	}
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", nickname=" + nickname
+				+ ", age=" + age + ", createDate=" + createDate + "]";
+	}
+	
+
 }
 

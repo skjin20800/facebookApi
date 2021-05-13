@@ -2,11 +2,10 @@ package config;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class DBConn {
@@ -34,6 +33,16 @@ public class DBConn {
 		}		
 	}
 
+	public static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
+		try {
+			conn.close();
+			pstmt.close();
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
 	}
 
 

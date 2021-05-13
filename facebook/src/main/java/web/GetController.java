@@ -15,9 +15,9 @@ public class GetController<T> {
     }
     
 	@GetMapping("/test")
-	public CMRespDto<?> join() {
+	public CMRespDto<?> test() {
 
-			return new CMRespDto<>(-1,"test get");
+			return new CMRespDto<>(-1,"로그인완료 get");
 	
 	}
 

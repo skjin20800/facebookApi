@@ -1,0 +1,40 @@
+package repository;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import config.DBConn;
+import web.dto.JoinReqDto;
+
+public class UserDao {
+
+	public int save(JoinReqDto dto) { // 회원가입
+	
+		StringBuffer sb = new StringBuffer(); // String전용 컬렉션(수집)이다, 동기화되어있음,
+		sb.append("INSERT INTO user(username, password, nickname, age, createDate) ");
+		sb.append("VALUES(?, ?, ?, ?, now()) ");
+		String sql = sb.toString();	
+		Connection conn = DBConn.getInstance();
+		PreparedStatement pstmt = null;
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getUsername());
+			pstmt.setString(2, dto.getPassword());
+			pstmt.setString(3, dto.getNickname());
+			pstmt.setInt(4, dto.getAge());
+			int result = pstmt.executeUpdate();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally { 
+			DBConn.close(conn, pstmt);
+		}
+		return -1;
+	}
+	
+	public void findById() {//회원정보보기
+		
+	}
+	
+}
