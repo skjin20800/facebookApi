@@ -22,87 +22,62 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import anno.GetMapping;
-import web.FrontController;
+import anno.PostMapping;
+import web.GetController;
+import web.PostController;
 import web.dto.CMRespDto;
 
 public class Dispatcher implements Filter {
-
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
 
-
-		
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 
-		
-		
-		//UTF변환
+		// UTF변환
 		request.setCharacterEncoding("utf-8");
-		//응답 데이터타입
+		// 응답 데이터타입
 		response.setContentType("application/json");
-		
+
 		String endPoint = request.getRequestURI().replaceAll(request.getContextPath(), "");
-		
+
 		System.out.println("엔드포인트 : " + endPoint); // /user/login
-		System.out.println("겟 메서드"+request.getMethod());
+		System.out.println("겟 메서드" + request.getMethod());
 
-		FrontController frontController = new FrontController();
+		if (request.getMethod().equals("GET")) {
+			GetController getController = new GetController();
+			Method[] methods = getController.getClass().getDeclaredMethods();
 
-		Method[] methods = frontController.getClass().getDeclaredMethods();
+			get(methods, endPoint, getController, request, response);
 
-		for (Method method : methods) {
-				Annotation annotation = method.getDeclaredAnnotation(GetMapping.class);
-				GetMapping requestMapping = (GetMapping) annotation;	
-			
-			if (requestMapping.value().equals(endPoint)) {
-				CMRespDto<?> cmRespDto = null;
-				try {
-					Parameter[] params = method.getParameters(); // LoginDto
-					String path = null;
-					if (params.length != 0) {
-						// 해당 dtoInstance를 리플렉션해서 set함수 호출(username, password)
-						Object dtoInstance = params[0].getType().newInstance();
-						setData(dtoInstance, request); // request에서 적용할 setter값을 전부 dtoInstance에 넣어 DTO로 전달한다.
-						cmRespDto = (CMRespDto<?>) method.invoke(frontController, dtoInstance);
-					} else {
-						cmRespDto = (CMRespDto<?>) method.invoke(frontController);
-					}
-					
+		} else if (request.getMethod().equals("POST")) {
+			PostController postController = new PostController();
+			Method[] methods = postController.getClass().getDeclaredMethods();
 
-					PrintWriter out = response.getWriter();
-						out.print("{ \"statuscode\": "+cmRespDto.getStatusCode()+", ");
-						out.print("\n\"Message\": \""+cmRespDto.getMsg()+"\", ");
-						out.print("\n\"Data\": \""+cmRespDto.getData()+"\"} ");					
-
-					out.flush();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				break;
-			}
+			post(methods, endPoint, postController, request, response);
 		}
+
 	}
-	
+
 	private <T> void setData(T dtoInstance, HttpServletRequest request) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		String input = "";
 		String json = "";
-		while((input = br.readLine()) != null) {
+		while ((input = br.readLine()) != null) {
 			json += input;
 		}
-		
-		//파라미터네임값
+
+		// 파라미터네임값
 		Iterator<String> keys = jsonToKeys(json).iterator();
-		//파라미터 네임 , 키값
+		// 파라미터 네임 , 키값
 		Map<String, String> values = jsonToValues(json);
 		while (keys.hasNext()) { // 2번 돈다 //다음번 주소가 있는지 체크.
-			String key = (String) keys.next(); //keys의 값을 key에담고 다음 keys값을 앞으로 땡겨놓는다
+			String key = (String) keys.next(); // keys의 값을 key에담고 다음 keys값을 앞으로 땡겨놓는다
 			String methodKey = keyToMethodKey(key); // setUsername
 
-			Method[] methods = dtoInstance.getClass().getDeclaredMethods(); 
+			Method[] methods = dtoInstance.getClass().getDeclaredMethods();
 
 			for (Method method : methods) {
 				if (method.getName().equals(methodKey)) {
@@ -120,36 +95,34 @@ public class Dispatcher implements Filter {
 			}
 		}
 	}
-	
-	
+
 	// 키, 값중 키 리스트 추출
 	private List<String> jsonToKeys(String json) {
 		String[] all = json.split(",");
-		
+
 		List<String> keys = new ArrayList<>();
-		for(int i = 0; i < all.length; i++) {
-		String[] all2 = all[i].split("\"");
-		keys.add(all2[1]);			
+		for (int i = 0; i < all.length; i++) {
+			String[] all2 = all[i].split("\"");
+			keys.add(all2[1]);
 		}
-		
+
 		return keys;
 	}
-	
+
 	// 키, 값중 값 리스트 추출
 	private Map<String, String> jsonToValues(String json) {
 		String[] all = json.split(",");
-		
+
 		Map<String, String> values = new HashMap<>();
-		for(int i = 0; i < all.length; i++) {
-		String[] all2 = all[i].split("\"");
-		values.put(all2[1], all2[3]);
+		for (int i = 0; i < all.length; i++) {
+			String[] all2 = all[i].split("\"");
+			values.put(all2[1], all2[3]);
 		}
 
 		return values;
 	}
-	
 
-	//키 값 setter변경
+	// 키 값 setter변경
 	private String keyToMethodKey(String key) {
 		String firstKey = "set";
 		String upperKey = key.substring(0, 1).toUpperCase();
@@ -158,4 +131,75 @@ public class Dispatcher implements Filter {
 		return firstKey + upperKey + remainKey;
 	}
 
+	// 응답
+	private void get(Method[] methods, String endPoint, GetController getController, HttpServletRequest request,
+			HttpServletResponse response) {
+		for (Method method : methods) {
+			Annotation annotation = method.getDeclaredAnnotation(GetMapping.class);
+			GetMapping getMapping = (GetMapping) annotation;
+			if (getMapping.value().equals(endPoint)) {
+				CMRespDto<?> cmRespDto = null;
+				try {
+					Parameter[] params = method.getParameters();
+					String path = null;
+					if (params.length != 0) {
+						// 해당 dtoInstance를 리플렉션해서 set함수 호출(username, password)
+						Object dtoInstance = params[0].getType().newInstance();
+						setData(dtoInstance, request); // request에서 적용할 setter값을 전부 dtoInstance에 넣어 DTO로 전달한다.
+						cmRespDto = (CMRespDto<?>) method.invoke(getController, dtoInstance);
+					} else {
+						cmRespDto = (CMRespDto<?>) method.invoke(getController);
+					}
+					PrintWriter out = response.getWriter();
+					out.print("{ \"statuscode\": " + cmRespDto.getStatusCode() + ", ");
+					out.print("\n\"Message\": \"" + cmRespDto.getMsg() + "\", ");
+					out.print("\n\"Data\": \"" + cmRespDto.getData() + "\"} ");
+
+					out.flush();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+
+		}
+
+	}
+	
+	
+	// 응답
+	private void post(Method[] methods, String endPoint, PostController postController, HttpServletRequest request,
+			HttpServletResponse response) {
+		for (Method method : methods) {
+			Annotation annotation = method.getDeclaredAnnotation(PostMapping.class);
+			PostMapping postMapping = (PostMapping) annotation;
+			if (postMapping.value().equals(endPoint)) {
+				CMRespDto<?> cmRespDto = null;
+				try {
+					Parameter[] params = method.getParameters();
+					String path = null;
+					if (params.length != 0) {
+						// 해당 dtoInstance를 리플렉션해서 set함수 호출(username, password)
+						Object dtoInstance = params[0].getType().newInstance();
+						setData(dtoInstance, request); // request에서 적용할 setter값을 전부 dtoInstance에 넣어 DTO로 전달한다.
+						cmRespDto = (CMRespDto<?>) method.invoke(postController, dtoInstance);
+					} else {
+						cmRespDto = (CMRespDto<?>) method.invoke(postController);
+					}
+					PrintWriter out = response.getWriter();
+					out.print("{ \"statuscode\": " + cmRespDto.getStatusCode() + ", ");
+					out.print("\n\"Message\": \"" + cmRespDto.getMsg() + "\", ");
+					out.print("\n\"Data\": \"" + cmRespDto.getData() + "\"} ");
+
+					out.flush();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+
+		}
+
+	}
+	
 }
