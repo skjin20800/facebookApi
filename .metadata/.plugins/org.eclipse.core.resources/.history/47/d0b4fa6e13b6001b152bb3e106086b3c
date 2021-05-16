@@ -1,0 +1,21 @@
+package repository;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import config.DBConn;
+import domain.user.User;
+import web.dto.auth.JoinReqDto;
+import web.dto.auth.LoginReqDto;
+
+public class LikeDao {
+	
+	private static LikeDao instance = new LikeDao();
+
+	public static LikeDao getInstance() {
+		return instance;
+	}	
+	
+	
+}

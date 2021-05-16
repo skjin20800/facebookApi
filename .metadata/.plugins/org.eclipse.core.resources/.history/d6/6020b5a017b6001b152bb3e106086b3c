@@ -1,0 +1,39 @@
+package service;
+
+import domain.likes.Likes;
+import repository.LikeDao;
+import web.dto.likes.LikeBoardReqDto;
+
+public class LikeService {
+	
+	private static LikeService instance = new LikeService();
+
+	public static LikeService getInstance() {
+		return instance;
+	}
+	
+	LikeDao likeDao = LikeDao.getInstance();
+
+	public int 게시글좋아요(LikeBoardReqDto dto) {
+		
+		// 좋아요 검사
+		Likes likes = likeDao.findByUserIdAndBoardId(dto.getUserId(), dto.getBoardId());
+		
+		if(likes == null) {
+			//좋아요 실행
+			
+		}else {
+			return -1;
+		}
+		
+		return 0;
+				
+	}
+
+	
+	}
+
+
+
+	
+

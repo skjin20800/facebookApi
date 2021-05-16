@@ -1,0 +1,13 @@
+package domain.likes;
+
+import java.sql.Timestamp;
+
+public class Likes {
+
+	private int id; 
+	private int userId;
+	private int boardId;
+	private int replyId;
+	private Timestamp createDate;
+	
+}

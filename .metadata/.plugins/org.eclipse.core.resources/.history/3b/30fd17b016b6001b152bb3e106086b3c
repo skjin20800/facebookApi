@@ -1,0 +1,31 @@
+package service;
+
+import repository.LikeDao;
+import web.dto.likes.LikeBoardReqDto;
+import web.dto.replys.ReplyReqDto;
+
+public class LikeService {
+	
+	private static LikeService instance = new LikeService();
+
+	public static LikeService getInstance() {
+		return instance;
+	}
+	
+	LikeDao likeDao= new LikeDao();
+
+	public int 댓글쓰기(LikeBoardReqDto dto) {
+		if(dto.getUserId() < 1 || dto.getBoardId() < 1) {
+			return -1;
+		}else {
+			return likeDao.	
+		}		
+	}
+
+	
+	}
+
+
+
+	
+

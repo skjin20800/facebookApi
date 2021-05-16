@@ -42,7 +42,6 @@ public class GetController<T> {
 			return new CMRespDto<>(1,"userInfo fail");
 		}
 		
-	
 	}
 
 

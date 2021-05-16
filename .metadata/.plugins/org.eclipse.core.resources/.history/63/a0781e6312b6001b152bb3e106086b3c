@@ -1,0 +1,5 @@
+package domain.likes;
+
+public class Likes {
+
+}

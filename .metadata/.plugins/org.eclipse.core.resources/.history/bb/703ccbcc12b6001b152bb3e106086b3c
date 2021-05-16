@@ -1,0 +1,15 @@
+package web.dto.likes;
+
+public class LikeReqDto {
+
+	private int userId;
+	private int boardId;
+	
+	
+
+
+	
+	
+}
+
+

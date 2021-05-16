@@ -1,0 +1,25 @@
+package repository;
+
+import domain.likes.Likes;
+
+public class LikeDao {
+	
+	private static LikeDao instance = new LikeDao();
+
+	public static LikeDao getInstance() {
+		return instance;
+	}	
+	
+	// 댓글 좋아요 검사
+	Likes findByUserIdAndBoardId(int userId, int boardId) {
+		
+	}
+	
+	// 댓글 좋아요 삽입
+	@Modifying
+	@Query(value = "INSERT INTO likes(userId, replyId, createDate) VALUES(:userId, :replyId, now())", nativeQuery = true)
+	int mReplyLike(Long userId, Long replyId);
+	
+	
+	
+}

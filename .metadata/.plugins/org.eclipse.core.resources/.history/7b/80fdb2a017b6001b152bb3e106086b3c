@@ -1,0 +1,59 @@
+package repository;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import config.DBConn;
+import domain.likes.Likes;
+
+public class LikeDao {
+	
+	private static LikeDao instance = new LikeDao();
+
+	public static LikeDao getInstance() {
+		return instance;
+	}	
+	
+	// 게시글 좋아요 검사
+	public Likes findByUserIdAndBoardId(int userId ,int boardId) { 
+		String sql = "SELECT id, userId, boardId, replyId, createDate FROM boards WHERE userId = ? AND boardId = ? ";
+		Connection conn = DBConn.getInstance();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userId);
+			pstmt.setInt(2, boardId);
+			rs = pstmt.executeQuery();
+	
+			if(rs.next()) {
+				Likes like = Likes.builder()
+						.id(rs.getInt("id"))
+						.userId(rs.getInt("userId"))
+						.boardId(rs.getInt("boardId"))
+						.replyId(rs.getInt("replyId"))
+						.createDate(rs.getTimestamp("createDate"));
+				
+				return like;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally { // 무조건 실행
+			DBConn.close(conn, pstmt);
+		}
+		return null;
+	}
+
+	
+	
+	
+//	
+//	// 댓글 좋아요 삽입
+//	@Modifying
+//	@Query(value = "INSERT INTO likes(userId, replyId, createDate) VALUES(:userId, :replyId, now())", nativeQuery = true)
+//	int mReplyLike(Long userId, Long replyId);
+	
+	
+	
+}
