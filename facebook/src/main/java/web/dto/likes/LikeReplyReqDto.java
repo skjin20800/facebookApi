@@ -1,9 +1,9 @@
 package web.dto.likes;
 
-public class LikeBoardReqDto {
+public class LikeReplyReqDto {
 
 	private int userId;
-	private int boardId;
+	private int replyId;
 	
 	public int getUserId() {
 		return userId;
@@ -11,14 +11,12 @@ public class LikeBoardReqDto {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public int getBoardId() {
-		return boardId;
+	public int getReplyId() {
+		return replyId;
 	}
-	public void setBoardId(int boardId) {
-		this.boardId = boardId;
-	}
-		
-	
+	public void setReplyId(int replyId) {
+		this.replyId = replyId;
+	}	
 	
 }
 

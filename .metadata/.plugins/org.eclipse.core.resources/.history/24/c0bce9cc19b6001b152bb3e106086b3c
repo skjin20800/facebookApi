@@ -1,0 +1,13 @@
+package web.dto.likes;
+
+public class LikeReplyReqDto {
+
+	private int userId;
+	private int replyId;
+	
+	
+	
+	
+}
+
+

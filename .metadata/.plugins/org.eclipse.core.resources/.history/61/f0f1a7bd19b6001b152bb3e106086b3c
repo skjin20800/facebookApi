@@ -1,6 +1,6 @@
 package web.dto.likes;
 
-public class LikeBoardReqDto {
+public class LikeReplyReqDto2 {
 
 	private int userId;
 	private int boardId;

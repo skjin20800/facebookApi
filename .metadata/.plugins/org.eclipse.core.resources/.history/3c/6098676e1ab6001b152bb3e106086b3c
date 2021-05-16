@@ -67,7 +67,7 @@ public class LikeDao {
 		return -1;
 	}
 	
-	//댓글 좋아요 검사
+	// 댓글 좋아요 검사
 	public Likes findByUserIdAndReplyId(LikeReplyReqDto dto) { 
 		String sql = "SELECT id, userId, boardId, replyId, createDate FROM likes WHERE userId = ? AND replyId = ? ";
 		Connection conn = DBConn.getInstance();
@@ -98,7 +98,7 @@ public class LikeDao {
 	}
 
 
-	//댓글 좋아요
+	//게시글 좋아요
 	public int saveReply(LikeReplyReqDto dto) { 
 		String sql = "INSERT INTO likes(userId, replyId, createDate) VALUES(?,?, now())";
 		Connection conn = DBConn.getInstance();

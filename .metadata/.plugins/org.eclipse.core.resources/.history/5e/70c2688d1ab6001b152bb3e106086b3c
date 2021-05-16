@@ -21,7 +21,7 @@ public class LikeService {
 		Likes likes = likeDao.findByUserIdAndBoardId(dto);
 		int result = 0;
 		
-		if(likes == null) { // 좋아요 유무 확인
+		if(likes == null) { // 좋아요 유무 검사
 			//좋아요 실행
 			return	result = likeDao.saveBoard(dto);
 		}else {
@@ -36,7 +36,7 @@ public class LikeService {
 		Likes likes = likeDao.findByUserIdAndReplyId(dto);
 		int result = 0;
 		
-		if(likes == null) { // 좋아요 유무 확인
+		if(likes == null) { // 좋아요 유무 검사
 			//좋아요 실행
 			return	result = likeDao.saveReply(dto);
 		}else {

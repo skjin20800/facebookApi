@@ -11,7 +11,6 @@ import web.dto.auth.JoinReqDto;
 import web.dto.auth.LoginReqDto;
 import web.dto.boards.SaveReqDto;
 import web.dto.likes.LikeBoardReqDto;
-import web.dto.likes.LikeReplyReqDto;
 import web.dto.replys.ReplyReqDto;
 
 public class PostController<T> {
@@ -25,18 +24,6 @@ public class PostController<T> {
         super();
     }
     
-	@PostMapping("/likeReply")
-	public CMRespDto<?> likeReply(LikeReplyReqDto dto ) {
-			int result = likeService.댓글좋아요(dto);
-			
-			if(result == 1) {
-				return new CMRespDto<>(result,"like complete");
-			}else {
-				return new CMRespDto<>(-1,"already like");
-					}		
-		}
-    
-    
 	@PostMapping("/likeBoard")
 	public CMRespDto<?> likeBoard(LikeBoardReqDto dto ) {
 			int result = likeService.게시글좋아요(dto);
@@ -47,6 +34,8 @@ public class PostController<T> {
 				return new CMRespDto<>(-1,"already like");
 					}		
 		}
+    
+    
     
 	@PostMapping("/replySave")
 	public CMRespDto<?> replySave(ReplyReqDto dto ) {

@@ -67,7 +67,7 @@ public class LikeDao {
 		return -1;
 	}
 	
-	//댓글 좋아요 검사
+	// 댓글 좋아요 검사
 	public Likes findByUserIdAndReplyId(LikeReplyReqDto dto) { 
 		String sql = "SELECT id, userId, boardId, replyId, createDate FROM likes WHERE userId = ? AND replyId = ? ";
 		Connection conn = DBConn.getInstance();
