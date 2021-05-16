@@ -18,3 +18,7 @@
 1621140536179	Rename type 'Boards'
 1621141203863	Rename type 'Board'
 1621141434154	Rename type 'Reply'
+1621144901373	Rename type 'ListRespDto'
+1621144963008	Copy compilation unit
+1621145009909	Rename type 'BoardDetailDto'
+1621145244428	Delete element

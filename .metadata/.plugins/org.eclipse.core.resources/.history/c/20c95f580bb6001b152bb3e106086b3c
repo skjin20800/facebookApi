@@ -18,36 +18,6 @@ public class BoardDao {
 		return instance;
 	}	
 	
-	public List<Boards> findAll() { // 게시글 전체
-		String sql = "SELECT id, userId, title, content, createDate FROM boards ";
-		Connection conn = DBConn.getInstance();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<Boards> boards = new ArrayList<>();
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();			
-			while(rs.next()) {
-				Boards board = Boards.builder()
-						.id(rs.getInt("id"))
-						.title(rs.getString("title"))
-						.content(rs.getString("content"))
-						.userId(rs.getInt("userId"))
-						.createDate(rs.getTimestamp("createDate"));
-				boards.add(board);
-			}
-			return boards;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally { // 무조건 실행
-			DBConn.close(conn, pstmt);
-		}
-		return null;
-	}
-	
-	
-	
 	public Boards findById(int boardId) { // 게시글 하나
 		String sql = "SELECT id, userId, title, content, createDate FROM boards WHERE id = ? ";
 		Connection conn = DBConn.getInstance();

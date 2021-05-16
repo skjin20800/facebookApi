@@ -53,6 +53,8 @@ public class Dispatcher implements Filter {
 			GetController getController = new GetController();
 			Method[] methods = getController.getClass().getDeclaredMethods();
 
+
+						
 			get(methods, endPoint, getController, request, response);
 
 		} else if (request.getMethod().equals("POST")) {

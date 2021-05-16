@@ -18,7 +18,7 @@ public class BoardDao {
 		return instance;
 	}	
 	
-	public List<Boards> findAll() { // 게시글 전체
+	public List<Boards> findByAll() { // 게시글 하나
 		String sql = "SELECT id, userId, title, content, createDate FROM boards ";
 		Connection conn = DBConn.getInstance();
 		PreparedStatement pstmt = null;
@@ -34,6 +34,7 @@ public class BoardDao {
 						.content(rs.getString("content"))
 						.userId(rs.getInt("userId"))
 						.createDate(rs.getTimestamp("createDate"));
+				
 				boards.add(board);
 			}
 			return boards;

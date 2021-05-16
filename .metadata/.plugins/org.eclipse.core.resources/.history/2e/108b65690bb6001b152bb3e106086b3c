@@ -1,9 +1,9 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import domain.boards.Boards;
+import domain.replys.Replys;
 import repository.BoardDao;
 import repository.ReplyDao;
 import web.dto.boards.ListRespDto;
@@ -21,22 +21,16 @@ public class BoardService {
 	ReplyDao replyDao= ReplyDao.getInstance();
 	
 	
-	public List<ListRespDto> 피드() {
+	public ListRespDto 피드() {
 
-		List<ListRespDto> listRespDtos = new ArrayList<>();
 		List<Boards> boards = boardDao.findAll();
 		
-		for (Boards board : boards) {
-			
-			ListRespDto listRespDto = new ListRespDto();
-			listRespDto.setBoard(boardDao.findById(board.getId()));
-			listRespDto.setReplys(replyDao.findById(board.getId()));
-			
-			listRespDtos.add(listRespDto);
-		}
-		return listRespDtos;
-	}
+		ListRespDto listRespDto = new ListRespDto();
+		listRespDto.setBoard(boardDao.findById(1));
+		listRespDto.setReplys(replyDao.findById(1));
 		
+		return listRespDto;				
+	}
 	
 
 	public int 글쓰기(SaveReqDto dto) {

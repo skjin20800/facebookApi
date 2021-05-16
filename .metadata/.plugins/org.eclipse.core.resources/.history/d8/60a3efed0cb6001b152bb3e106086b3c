@@ -1,7 +1,5 @@
 package web;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import anno.GetMapping;
@@ -22,9 +20,9 @@ public class GetController<T> {
     
 	@GetMapping("/feed")
 	public CMRespDto<?> feed() {
-		List<ListRespDto> boardDetailDto = boardService.피드();
+		ListRespDto boardDetailDto = boardService.피드();
 			 
-			if(boardDetailDto != null) {
+			if(boardDetailDto.getBoard() != null && boardDetailDto.getReplys() != null) {
 				return new CMRespDto<>(1, "feed complete", boardDetailDto);
 			}else {
 				return new CMRespDto<>(-1,"feed fail");

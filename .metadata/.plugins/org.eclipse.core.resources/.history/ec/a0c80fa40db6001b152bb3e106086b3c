@@ -41,8 +41,7 @@ public class Dispatcher implements Filter {
 		// UTF변환
 		request.setCharacterEncoding("utf-8");
 		// 응답 데이터타입
-		response.setContentType("application/json; charset=UTF-8");
-
+		response.setContentType("application/json");
 
 		String endPoint = request.getRequestURI().replaceAll(request.getContextPath(), "");
 
@@ -53,6 +52,8 @@ public class Dispatcher implements Filter {
 			GetController getController = new GetController();
 			Method[] methods = getController.getClass().getDeclaredMethods();
 
+
+						
 			get(methods, endPoint, getController, request, response);
 
 		} else if (request.getMethod().equals("POST")) {

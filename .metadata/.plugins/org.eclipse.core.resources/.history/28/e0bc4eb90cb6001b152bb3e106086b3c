@@ -32,9 +32,8 @@ public class BoardService {
 			listRespDto.setBoard(boardDao.findById(board.getId()));
 			listRespDto.setReplys(replyDao.findById(board.getId()));
 			
-			listRespDtos.add(listRespDto);
 		}
-		return listRespDtos;
+		
 	}
 		
 	

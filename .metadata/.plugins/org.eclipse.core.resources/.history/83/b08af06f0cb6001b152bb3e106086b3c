@@ -1,7 +1,5 @@
 package web;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import anno.GetMapping;
@@ -9,7 +7,7 @@ import domain.user.User;
 import service.BoardService;
 import service.UserService;
 import web.dto.CMRespDto;
-import web.dto.boards.ListRespDto;
+import web.dto.boards.BoardDetailDto;
 
 public class GetController<T> {
 	
@@ -22,9 +20,9 @@ public class GetController<T> {
     
 	@GetMapping("/feed")
 	public CMRespDto<?> feed() {
-		List<ListRespDto> boardDetailDto = boardService.피드();
+		BoardDetailDto boardDetailDto = boardService.피드();
 			 
-			if(boardDetailDto != null) {
+			if(boardDetailDto.getBoard() != null && boardDetailDto.getReplys() != null) {
 				return new CMRespDto<>(1, "feed complete", boardDetailDto);
 			}else {
 				return new CMRespDto<>(-1,"feed fail");
