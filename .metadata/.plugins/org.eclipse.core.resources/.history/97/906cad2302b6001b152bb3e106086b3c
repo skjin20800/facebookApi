@@ -1,0 +1,19 @@
+package web.dto.boards;
+
+import java.util.List;
+
+import domain.boards.Board;
+import domain.replys.Reply;
+
+public class ListRespDto {
+
+	private List<Board> board;
+	private List<Reply> replys;
+
+
+	
+	
+	
+}
+
+

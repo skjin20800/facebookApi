@@ -1,0 +1,15 @@
+package domain.replys;
+
+import java.sql.Timestamp;
+
+public class Replys {
+
+	private int id;
+	private int userId;
+	private int boardId;
+	private String content;
+	private Timestamp createDate;
+	
+}
+
+

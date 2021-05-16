@@ -1,0 +1,17 @@
+package service;
+
+import repository.BoardDao;
+import web.dto.boards.BoardSaveReqDto;
+
+public class BoardService {
+
+	BoardDao boardDao= new BoardDao();
+
+	public int 글쓰기(BoardSaveReqDto dto) {
+		if(dto.getUserId() < 1 || dto.getTitle() == null || dto.getContent() == null) {
+			return -1;
+		}else {
+			return boardDao.save(dto);	
+		}		
+	}
+}

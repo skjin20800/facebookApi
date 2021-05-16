@@ -2,6 +2,8 @@ package domain.boards;
 
 import java.sql.Timestamp;
 
+import domain.user.User;
+
 public class Boards {
 
 	private int id;
@@ -39,6 +41,41 @@ public class Boards {
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
+
+	public static Boards builder() {
+		return new Boards();
+	}
+	
+	public Boards id(int id) {
+		this.id = id;
+		return this;
+	}
+	
+	public Boards userId(int userId) {
+		this.userId = userId;
+		return this;
+	}
+	
+	public Boards title (String title) {
+		this.title = title;
+		return this;
+	}
+	
+	public Boards content (String content) {
+		this.content = content;
+		return this;
+	}
+	
+	public Boards createDate (Timestamp createDate) {
+		this.createDate = createDate;
+		return this;
+	}
+	@Override
+	public String toString() {
+		return "Boards [id=" + id + ", userId=" + userId + ", title=" + title + ", content=" + content + ", createDate="
+				+ createDate + "]";
+	}
+	
 	
 }
 

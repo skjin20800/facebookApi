@@ -1,0 +1,14 @@
+package web.dto.replys;
+
+public class replyReqDto {
+
+	private int userId;
+	private String title;
+	private String content;
+
+	
+	
+	
+}
+
+

@@ -1,0 +1,28 @@
+package web.dto.boards;
+
+import java.util.List;
+
+import domain.boards.Boards;
+import domain.replys.Reply;
+
+public class ListRespDto {
+
+	private List<Boards> board;
+	private List<Reply> replys;
+	
+	public List<Boards> getBoard() {
+		return board;
+	}
+	public void setBoard(List<Boards> board) {
+		this.board = board;
+	}
+	public List<Reply> getReplys() {
+		return replys;
+	}
+	public void setReplys(List<Reply> replys) {
+		this.replys = replys;
+	}	
+	
+}
+
+

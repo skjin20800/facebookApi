@@ -3,16 +3,55 @@ package repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import config.DBConn;
-import domain.user.User;
-import web.dto.auth.JoinReqDto;
-import web.dto.auth.LoginReqDto;
+import domain.boards.Boards;
 import web.dto.boards.SaveReqDto;
 
 public class BoardDao {
+	
+	private static BoardDao instance = new BoardDao();
 
-	public int save(SaveReqDto dto) { // 회원가입
+	public static BoardDao getInstance() {
+		return instance;
+	}	
+	
+	public Boards findById(int boardId) { // 게시글 하나
+		String sql = "SELECT id, userId, title, content, createDate FROM boards WHERE id = ? ";
+		Connection conn = DBConn.getInstance();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardId);
+			rs = pstmt.executeQuery();
+	
+			if(rs.next()) {
+				Boards board = Boards.builder()
+						.id(rs.getInt("id"))
+						.title(rs.getString("title"))
+						.content(rs.getString("content"))
+						.userId(rs.getInt("userId"))
+						.createDate(rs.getTimestamp("createDate"));
+				
+				return board;
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally { // 무조건 실행
+			DBConn.close(conn, pstmt);
+		}
+		return null;
+	}
+
+	
+	
+
+	public int save(SaveReqDto dto) { // 글쓰기
 		String sql = "INSERT INTO boards(userId, title, content, createDate) VALUES(?,?,?, now())";
 		Connection conn = DBConn.getInstance();
 		PreparedStatement pstmt = null;

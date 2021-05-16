@@ -1,0 +1,11 @@
+package web.dto.replys;
+
+public class replyReqDto {
+
+	private int userId;
+	private int boardId;
+	private String content;
+
+}
+
+

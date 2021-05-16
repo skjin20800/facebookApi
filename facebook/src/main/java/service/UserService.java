@@ -6,6 +6,13 @@ import web.dto.auth.JoinReqDto;
 import web.dto.auth.LoginReqDto;
 
 public class UserService {
+	
+	private static UserService instance = new UserService();
+
+	public static UserService getInstance() {
+		return instance;
+	}
+	
 
 	UserDao userDao= new UserDao();
 

@@ -10,6 +10,13 @@ import web.dto.auth.JoinReqDto;
 import web.dto.auth.LoginReqDto;
 
 public class UserDao {
+	
+	private static UserDao instance = new UserDao();
+
+	public static UserDao getInstance() {
+		return instance;
+	}	
+	
 
 	public int save(JoinReqDto dto) { // 회원가입
 	
