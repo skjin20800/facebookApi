@@ -146,6 +146,7 @@ public class Dispatcher implements Filter {
 				CMRespDto<?> cmRespDto = null;
 				try {
 					Parameter[] params = method.getParameters();
+					String path = null;
 					if (params.length != 0) {
 						cmRespDto = (CMRespDto<?>) method.invoke(getController, request);
 					} else {

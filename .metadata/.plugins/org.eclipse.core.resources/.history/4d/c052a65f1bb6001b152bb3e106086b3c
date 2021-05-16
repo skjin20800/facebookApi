@@ -92,7 +92,7 @@ public class PostController<T> {
 		}
 	
 	@PostMapping("/logout")
-	public CMRespDto<?> logout() { // Get으로 만들어도 되지만 관리하기 편하게 POST로 구현
+	public CMRespDto<?> logout(LoginReqDto dto) { // Get으로 만들어도 되지만 관리하기 편하게 POST로 구현
 			return new CMRespDto<>(-1,"logout");
 		}
 	

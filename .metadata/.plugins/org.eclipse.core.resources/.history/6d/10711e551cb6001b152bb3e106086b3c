@@ -16,11 +16,11 @@ public class UserDao {
 	public static UserDao getInstance() {
 		return instance;
 	}	
-
-	// 회원가입
-	public int save(JoinReqDto dto) { 
 	
-		StringBuffer sb = new StringBuffer();
+
+	public int save(JoinReqDto dto) { // 회원가입
+	
+		StringBuffer sb = new StringBuffer(); // String전용 컬렉션(수집)이다, 동기화되어있음,
 		sb.append("INSERT INTO user(username, password, nickname, age, createDate) ");
 		sb.append("VALUES(?, ?, ?, ?, now()) ");
 		String sql = sb.toString();	
@@ -43,7 +43,6 @@ public class UserDao {
 		return -1;
 	}
 	
-	//로그인 정보로 User데이터 찾기
 	public User findByUsernameAndPassword(LoginReqDto dto) {
 		String sql = "SELECT id, username, password, nickname, age, createDate FROM user WHERE username = ? AND password = ?";
 		Connection conn = DBConn.getInstance();
@@ -75,7 +74,6 @@ public class UserDao {
 		return null;
 	}
 	
-	// username으로 User 데이터 한 건 조회
 	public User findByUsername(String username) {
 		String sql = "SELECT id, username, password, nickname, age, createDate FROM user WHERE username = ? ";
 		Connection conn = DBConn.getInstance();

@@ -18,8 +18,7 @@ public class BoardDao {
 		return instance;
 	}	
 	
-	// 게시글 전체 찾기
-	public List<Boards> findAll() { 
+	public List<Boards> findAll() { // 게시글 전체
 		String sql = "SELECT id, userId, title, content, createDate FROM boards ";
 		Connection conn = DBConn.getInstance();
 		PreparedStatement pstmt = null;
@@ -48,8 +47,8 @@ public class BoardDao {
 	}
 	
 	
-	// 아이디로 게시글 하나 찾기
-	public Boards findById(int boardId) { 
+	
+	public Boards findById(int boardId) { // 게시글 하나
 		String sql = "SELECT id, userId, title, content, createDate FROM boards WHERE id = ? ";
 		Connection conn = DBConn.getInstance();
 		PreparedStatement pstmt = null;
@@ -69,6 +68,8 @@ public class BoardDao {
 				
 				return board;
 			}
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally { // 무조건 실행
@@ -77,8 +78,10 @@ public class BoardDao {
 		return null;
 	}
 
-	//게시글 쓰기
-	public int save(SaveReqDto dto) { 
+	
+	
+
+	public int save(SaveReqDto dto) { // 글쓰기
 		String sql = "INSERT INTO boards(userId, title, content, createDate) VALUES(?,?,?, now())";
 		Connection conn = DBConn.getInstance();
 		PreparedStatement pstmt = null;

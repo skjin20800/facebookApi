@@ -14,7 +14,8 @@ public class ReplyService {
 		return instance;
 	}
 	
-	ReplyDao replyDao= ReplyDao.getInstance();
+
+	ReplyDao replyDao= new ReplyDao();
 
 	public int 댓글쓰기(ReplyReqDto dto) {
 		if(dto.getUserId() < 1 || dto.getBoardId() < 1 || dto.getContent() == null) {

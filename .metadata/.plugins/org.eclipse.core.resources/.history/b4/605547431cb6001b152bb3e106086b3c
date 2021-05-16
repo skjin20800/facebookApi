@@ -58,8 +58,8 @@ public class ReplyDao {
 	}
 
 	
-	// 댓글 쓰기
-	public int save(ReplyReqDto dto) {
+
+	public int save(ReplyReqDto dto) { // 댓글쓰기
 		String sql = "INSERT INTO replys(userId, boardId, content, createDate) VALUES(?,?,?, now())";
 		Connection conn = DBConn.getInstance();
 		PreparedStatement pstmt = null;
