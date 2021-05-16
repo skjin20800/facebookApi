@@ -1,0 +1,18 @@
+package service;
+
+import web.dto.auth.JoinReqDto;
+import web.dto.boards.SaveReqDto;
+
+public class BoardService {
+
+	BoardDao boardDao= new BoardDao();
+
+	public int 회원가입(SaveReqDto dto) {
+		return boardDao.save(dto);
+	}
+
+
+
+
+	
+}

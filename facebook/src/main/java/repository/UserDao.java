@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 
 import config.DBConn;
 import domain.user.User;
-import web.dto.JoinReqDto;
-import web.dto.LoginReqDto;
+import web.dto.auth.JoinReqDto;
+import web.dto.auth.LoginReqDto;
 
 public class UserDao {
 

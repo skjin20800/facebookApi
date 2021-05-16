@@ -2,8 +2,8 @@ package service;
 
 import domain.user.User;
 import repository.UserDao;
-import web.dto.JoinReqDto;
-import web.dto.LoginReqDto;
+import web.dto.auth.JoinReqDto;
+import web.dto.auth.LoginReqDto;
 
 public class UserService {
 

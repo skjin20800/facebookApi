@@ -1,19 +1,37 @@
 package web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import anno.PostMapping;
 import domain.user.User;
+import service.BoardService;
 import service.UserService;
 import web.dto.CMRespDto;
-import web.dto.JoinReqDto;
-import web.dto.LoginReqDto;
+import web.dto.auth.JoinReqDto;
+import web.dto.auth.LoginReqDto;
+import web.dto.boards.SaveReqDto;
 
 public class PostController<T> {
 	
 	UserService userService = new UserService();
+	BoardService boardService = new BoardService();
 	
     public PostController() {
         super();
     }
+    
+	@PostMapping("/boardSave")
+	public CMRespDto<?> boardSave(SaveReqDto dto  ) {
+			int result = boardService.글쓰기(dto);
+			
+			if(result == 1) {
+				return new CMRespDto<>(result,"boardSave complete");
+			}else {
+				return new CMRespDto<>(-1,"boardSave fail");
+					}		
+		
+		}
+    
 
 	@PostMapping("/join")
 	public CMRespDto<?> join(JoinReqDto dto) {

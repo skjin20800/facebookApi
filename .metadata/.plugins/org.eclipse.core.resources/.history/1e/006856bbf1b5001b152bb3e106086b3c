@@ -1,0 +1,15 @@
+package web.dto.boards;
+
+import java.sql.Timestamp;
+
+public class BoardSaveReqDto {
+
+	private int id;
+	private int userId;
+	private String title;
+	private String content;
+	private Timestamp createDate;
+	
+}
+
+

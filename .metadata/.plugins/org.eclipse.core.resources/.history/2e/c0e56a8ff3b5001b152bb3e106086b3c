@@ -1,0 +1,11 @@
+package web.dto.boards;
+
+public class SaveReqDto {
+
+	private int userId;
+	private String title;
+	private String content;
+	
+}
+
+
