@@ -14,7 +14,6 @@ public class ReplyDao {
 	
 	
 	private static ReplyDao instance = new ReplyDao();
-	private LikeDao likeDao = LikeDao.getInstance();
 
 	public static ReplyDao getInstance() {
 		return instance;
@@ -34,16 +33,14 @@ public class ReplyDao {
 			List<Replys> replyList = new ArrayList<>();
 			
 			while(rs.next()) {
-				Replys reply = Replys.builder()
+				Replys board = Replys.builder()
 						.id(rs.getInt("id"))
 						.boardId(rs.getInt("boardId"))
 						.content(rs.getString("content"))
 						.userId(rs.getInt("userId"))
 						.createDate(rs.getTimestamp("createDate"));
 				
-				reply.setLikeCount(likeDao.findByReplyId(reply)); //좋아요 갯수 삽입
-				
-				replyList.add(reply);
+				replyList.add(board);
 			}
 			return replyList;
 			

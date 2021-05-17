@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import config.DBConn;
 import domain.boards.Boards;
 import domain.likes.Likes;
-import domain.replys.Replys;
 import web.dto.likes.LikeBoardReqDto;
 import web.dto.likes.LikeReplyReqDto;
 
@@ -28,29 +27,6 @@ public class LikeDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, board.getId());
-			rs = pstmt.executeQuery();
-	
-			if(rs.next()) {
-				int result = rs.getInt("list");
-				return result;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally { 
-			DBConn.close(conn, pstmt);
-		}
-		return -1;
-	}
-	
-	// 댓글 좋아요 목록
-	public int findByReplyId(Replys reply) { 
-		String sql = "SELECT count(*) list FROM likes WHERE replyId = ? ";
-		Connection conn = DBConn.getInstance();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reply.getId());
 			rs = pstmt.executeQuery();
 	
 			if(rs.next()) {

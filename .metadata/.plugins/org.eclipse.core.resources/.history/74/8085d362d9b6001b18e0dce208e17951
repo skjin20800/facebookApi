@@ -7,11 +7,8 @@ public class Replys {
 	private int id;
 	private int userId;
 	private int boardId;
-	private int likeCount;
 	private String content;
 	private Timestamp createDate;
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -29,14 +26,6 @@ public class Replys {
 	}
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
-	}
-	
-	
-	public int getLikeCount() {
-		return likeCount;
-	}
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
 	}
 	public String getContent() {
 		return content;
@@ -81,9 +70,12 @@ public class Replys {
 	}
 	@Override
 	public String toString() {
-		return "Replys [id=" + id + ", userId=" + userId + ", boardId=" + boardId + ", likeCount=" + likeCount
-				+ ", content=" + content + ", createDate=" + createDate + "]";
+		return "Replys [id=" + id + ", userId=" + userId + ", boardId=" + boardId + ", content=" + content
+				+ ", createDate=" + createDate + "]";
 	}
+
+	
+	
 	
 }
 

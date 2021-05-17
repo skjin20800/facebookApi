@@ -41,7 +41,7 @@ public class ReplyDao {
 						.userId(rs.getInt("userId"))
 						.createDate(rs.getTimestamp("createDate"));
 				
-				reply.setLikeCount(likeDao.findByReplyId(reply)); //좋아요 갯수 삽입
+				reply.setLikeCount(rs.getInt(likeDao.findByReplyId(reply))); //좋아요 갯수 삽입
 				
 				replyList.add(reply);
 			}
