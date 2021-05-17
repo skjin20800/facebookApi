@@ -5,6 +5,7 @@ import java.util.List;
 
 import domain.boards.Boards;
 import repository.BoardDao;
+import repository.LikeDao;
 import repository.ReplyDao;
 import web.dto.boards.ListRespDto;
 import web.dto.boards.SaveReqDto;
@@ -19,6 +20,7 @@ public class BoardService {
 
 	BoardDao boardDao= BoardDao.getInstance();
 	ReplyDao replyDao= ReplyDao.getInstance();
+	LikeDao likeDao= LikeDao.getInstance();
 	
 	// 피드에 List<게시글+List<댓글>>형태로 데이터를 넘겨준다.
 	public List<ListRespDto> 피드() {
@@ -29,10 +31,13 @@ public class BoardService {
 		for (Boards board : boards) {
 			
 			ListRespDto listRespDto = new ListRespDto();
-			listRespDto.setBoard(boardDao.findById(board.getId()));
-			listRespDto.setReplys(replyDao.findById(board.getId()));
-			
-			listRespDtos.add(listRespDto);
+			Boards brd = boardDao.findById(board.getId()); // DB에서 select한 board 한건 담기
+			brd.setLikeCount(likeDao.findByBoardId(board)); // 좋아요 삽입
+		
+			listRespDto.setBoard(brd); // board담기 
+			listRespDto.setReplys(replyDao.findById(board.getId())); // reply리스트 담기
+		
+			listRespDtos.add(listRespDto); 
 		}
 		return listRespDtos;
 	}

@@ -1,13 +1,10 @@
 package service;
 
 import repository.ReplyDao;
-import web.dto.boards.SaveReqDto;
 import web.dto.replys.ReplyReqDto;
 
 public class ReplyService {
-	
-	
-	
+
 	private static ReplyService instance = new ReplyService();
 
 	public static ReplyService getInstance() {

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import config.DBConn;
+import domain.boards.Boards;
 import domain.likes.Likes;
 import web.dto.likes.LikeBoardReqDto;
 import web.dto.likes.LikeReplyReqDto;
@@ -15,7 +16,31 @@ public class LikeDao {
 
 	public static LikeDao getInstance() {
 		return instance;
-	}	
+	}
+	
+	// 게시글 좋아요 목록
+	public int findByBoardId(Boards board) { 
+		String sql = "SELECT count(*) list FROM likes WHERE boardId = ? ";
+		Connection conn = DBConn.getInstance();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board.getId());
+			rs = pstmt.executeQuery();
+	
+			if(rs.next()) {
+				int result = rs.getInt("list");
+				return result;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally { 
+			DBConn.close(conn, pstmt);
+		}
+		return -1;
+	}
+	
 	
 	// 게시글 좋아요 검사
 	public Likes findByUserIdAndBoardId(LikeBoardReqDto dto) { 

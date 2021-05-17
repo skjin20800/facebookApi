@@ -2,8 +2,6 @@ package domain.replys;
 
 import java.sql.Timestamp;
 
-import domain.boards.Boards;
-
 public class Replys {
 
 	private int id;

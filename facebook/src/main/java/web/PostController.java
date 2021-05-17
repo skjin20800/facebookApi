@@ -13,8 +13,9 @@ import web.dto.boards.SaveReqDto;
 import web.dto.likes.LikeBoardReqDto;
 import web.dto.likes.LikeReplyReqDto;
 import web.dto.replys.ReplyReqDto;
+import web.dto.user.InfoReqDto;
 
-public class PostController<T> {
+public class PostController {
 	
 	UserService userService = UserService.getInstance();
 	BoardService boardService = BoardService.getInstance();
@@ -24,6 +25,8 @@ public class PostController<T> {
     public PostController() {
         super();
     }
+    
+    
     
 	@PostMapping("/likeReply")
 	public CMRespDto<?> likeReply(LikeReplyReqDto dto ) {
@@ -69,6 +72,17 @@ public class PostController<T> {
 					}		
 		
 		}
+	
+	@PostMapping("/userInfo")
+	public CMRespDto<?> userInfo(InfoReqDto dto) {
+		User user = userService.회원정보(dto.getUsername());		
+		if(user != null) {
+			return new CMRespDto<>(1,"userInfo complete",user);	
+		}else {
+			return new CMRespDto<>(1,"userInfo fail");
+		}
+	}
+	
     
 	@PostMapping("/join")
 	public CMRespDto<?> join(JoinReqDto dto) {
@@ -87,7 +101,7 @@ public class PostController<T> {
 		if(user != null) {
 			return new CMRespDto<>(1,"login complete",user.toString());
 		}else {
-			return new CMRespDto<>(-1,"login fail",user.toString());
+			return new CMRespDto<>(-1,"login fail");
 				}		
 		}
 	

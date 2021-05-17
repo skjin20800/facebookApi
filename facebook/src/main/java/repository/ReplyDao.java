@@ -7,12 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import config.DBConn;
-import domain.boards.Boards;
 import domain.replys.Replys;
-import domain.user.User;
-import web.dto.auth.JoinReqDto;
-import web.dto.auth.LoginReqDto;
-import web.dto.boards.SaveReqDto;
 import web.dto.replys.ReplyReqDto;
 
 public class ReplyDao {

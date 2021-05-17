@@ -2,15 +2,15 @@ package domain.boards;
 
 import java.sql.Timestamp;
 
-import domain.user.User;
-
 public class Boards {
 
 	private int id;
 	private int userId;
+	private int likeCount; //DB테이블에 컬럼이 없다
 	private String title;
-	private String content;
+	private String content;	
 	private Timestamp createDate;
+	
 	public int getId() {
 		return id;
 	}
@@ -41,6 +41,14 @@ public class Boards {
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
+	
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
 
 	public static Boards builder() {
 		return new Boards();
@@ -70,11 +78,18 @@ public class Boards {
 		this.createDate = createDate;
 		return this;
 	}
+	
+	public Boards likeCount (int likeCount) {
+		this.likeCount = likeCount;
+		return this;
+	}
 	@Override
 	public String toString() {
-		return "Boards [id=" + id + ", userId=" + userId + ", title=" + title + ", content=" + content + ", createDate="
-				+ createDate + "]";
+		return "Boards [id=" + id + ", userId=" + userId + ", likeCount=" + likeCount + ", title=" + title
+				+ ", content=" + content + ", createDate=" + createDate + "]";
 	}
+	
+
 	
 	
 }

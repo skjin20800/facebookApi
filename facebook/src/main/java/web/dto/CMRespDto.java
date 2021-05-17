@@ -1,9 +1,9 @@
 package web.dto;
 
 public class CMRespDto<T> {
-	private String msg; // 오류 내용 Value too long for column "TITLE VARCHAR(60)"
+	private String msg; // 메세지
 	private int statusCode; //-1 실패, 1성공
-	private T data;
+	private T data; //결과 데이터
 	
 	public CMRespDto(int statusCode,  String msg, T data) {
 		this.statusCode = statusCode;

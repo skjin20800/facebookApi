@@ -19,11 +19,10 @@ public class LikeService {
 		
 		// 좋아요 검사
 		Likes likes = likeDao.findByUserIdAndBoardId(dto);
-		int result = 0;
 		
 		if(likes == null) { // 좋아요 유무 확인
 			//좋아요 실행
-			return	result = likeDao.saveBoard(dto);
+			return	likeDao.saveBoard(dto);
 		}else {
 			//이미 좋아요 상태
 			return -1;
@@ -34,11 +33,10 @@ public class LikeService {
 		
 		// 좋아요 검사
 		Likes likes = likeDao.findByUserIdAndReplyId(dto);
-		int result = 0;
 		
 		if(likes == null) { // 좋아요 유무 확인
 			//좋아요 실행
-			return	result = likeDao.saveReply(dto);
+			return	likeDao.saveReply(dto);
 		}else {
 			//이미 좋아요 상태
 			return -1;
