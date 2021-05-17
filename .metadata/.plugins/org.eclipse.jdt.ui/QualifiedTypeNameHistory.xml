@@ -11,7 +11,6 @@
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="web.FrontController"/>
     <fullyQualifiedTypeName name="web.dto.JoinReqDto"/>
-    <fullyQualifiedTypeName name="anno.PostMapping"/>
     <fullyQualifiedTypeName name="web.PostController"/>
     <fullyQualifiedTypeName name="web.GetController"/>
     <fullyQualifiedTypeName name="web.dto.LoginReqDto"/>
@@ -22,7 +21,6 @@
     <fullyQualifiedTypeName name="config.DBConn"/>
     <fullyQualifiedTypeName name="repository.BoardDao"/>
     <fullyQualifiedTypeName name="domain.replys.Reply"/>
-    <fullyQualifiedTypeName name="domain.replys.Replys"/>
     <fullyQualifiedTypeName name="anno.GetMapping"/>
     <fullyQualifiedTypeName name="service.BoardService"/>
     <fullyQualifiedTypeName name="service.UserService"/>
@@ -32,9 +30,11 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.sql.Timestamp"/>
     <fullyQualifiedTypeName name="service.LikeService"/>
-    <fullyQualifiedTypeName name="repository.LikeDao"/>
     <fullyQualifiedTypeName name="web.dto.likes.LikeBoardReqDto"/>
     <fullyQualifiedTypeName name="web.dto.likes.LikeReplyReqDto"/>
     <fullyQualifiedTypeName name="repository.ReplyDao"/>
     <fullyQualifiedTypeName name="repository.UserDao"/>
+    <fullyQualifiedTypeName name="anno.PostMapping"/>
+    <fullyQualifiedTypeName name="domain.replys.Replys"/>
+    <fullyQualifiedTypeName name="repository.LikeDao"/>
 </qualifiedTypeNameHistroy>
