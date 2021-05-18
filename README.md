@@ -20,6 +20,7 @@
 이번 사전과제를 maven프로젝트로 진행해보는것이 처음이었습니다.
 그래서 기본적인것은 웹 서칭을 하였고 안에 MVC관련 로직은 제 블로그 or 제 git 코드를 참고하여 만들었습니다
 
+####  전체 구성
 - 메이븐 프로젝트 생성 : 웹 검색
 - DB연결 : 개인블로그 참고하여 제작
 - filter : Dispathcer.java =  Reflect 기능 개인 블로그 and 과거 야놀자 프로젝트 코드 참고하여 제작
@@ -28,6 +29,8 @@
 - 게시글, 좋아요, 댓글 : everytime 프로젝트 코드 참고하여 제작
 - 빌드 및 실행 : 웹검색
 
+<br>
+
 #### 에러찾기 패턴
 1. Request -> Dispatcher(필터) 점검
 2. Dispathcer -> Controller 점검
@@ -35,6 +38,7 @@
 4. Service -> Repository 점검
 5. 이상이 없다면 역순으로 재점검
 
+<br>
 
 #### 에러찾기 기본마인드
 1.  에러를 찾을때는 기본적으로 전체 그림을 알고 있어야한다고 생각합니다.
@@ -62,7 +66,9 @@
 4. Tomcat 실행
 
 ![image](./mdimg/build4.png)
-<br>
+
+
+<br>  
 
 5. Postman을 이용하여 사이트접속
 - 기본주소 : localhost:8000/facebook/
