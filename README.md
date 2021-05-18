@@ -48,17 +48,21 @@
 
  ![image](./mdimg/build1.png)
 
+<br>
 2. target폴더 안의 war파일 복사
 
 ![image](./mdimg/build2.png)
 
+<br>
 3. Tomcat이 깔려있는 webapps 붙여넣기
 
 ![image](./mdimg/build3.png)
 
+<br>
 4. Tomcat 실행
 
 ![image](./mdimg/build4.png)
+<br>
 
 5. Postman을 이용하여 사이트접속
 - 기본주소 : localhost:8000/facebook/
@@ -66,7 +70,7 @@
 - Get요청 : localhost:8000/facebook/feed
 ![image](./mdimg/request1.png)
 
-- Post요청 : http://localhost:8000/facebook/join
+- Post요청 : localhost:8000/facebook/join
 ![image](./mdimg/request2.png)
 
 
