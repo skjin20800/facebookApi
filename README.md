@@ -1,3 +1,5 @@
+
+
 # Facebook api 구현
 
 
@@ -43,23 +45,27 @@
 # 프로젝트 빌드
 1. Maven generate-sources 클릭
 - war파일 생성
+
  ![image](./mdimg/build1.png)
 
 2. target폴더 안의 war파일 복사
+
 ![image](./mdimg/build2.png)
 
-4. Tomcat이 깔려있는 webapps 붙여넣기
+3. Tomcat이 깔려있는 webapps 붙여넣기
+
 ![image](./mdimg/build3.png)
 
-5. Tomcat 실행
+4. Tomcat 실행
+
 ![image](./mdimg/build4.png)
 
-6. Postman을 이용하여 사이트접속
+5. Postman을 이용하여 사이트접속
 - 기본주소 : localhost:8000/facebook/
 
 - Get요청 : localhost:8000/facebook/feed
 ![image](./mdimg/request1.png)
-- 
+
 - Post요청 : http://localhost:8000/facebook/join
 ![image](./mdimg/request2.png)
 
