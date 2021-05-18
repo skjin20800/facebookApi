@@ -45,6 +45,8 @@ public class Dispatcher implements Filter {
 
 		String endPoint = request.getRequestURI().replaceAll(request.getContextPath(), "");
 
+		System.out.println("엔드포인트 : " + endPoint); // /user/login
+		System.out.println("겟 메서드" + request.getMethod());
 
 		if (request.getMethod().equals("GET")) {
 			GetController getController = new GetController();
@@ -71,13 +73,11 @@ public class Dispatcher implements Filter {
 			json += input;
 		}
 
-		// 파라미터 키 추출
+		// 파라미터네임값
 		Iterator<String> keys = jsonToKeys(json).iterator();
-		
-		// 파라미터  값 추출, 
+		// 파라미터 네임 , 키값
 		Map<String, String> values = jsonToValues(json);
-		
-		while (keys.hasNext()) { // keys의 데이터 수 만큼 반복 //다음번 주소가 있는지 체크.
+		while (keys.hasNext()) { // 2번 돈다 //다음번 주소가 있는지 체크.
 			String key = (String) keys.next(); // keys의 값을 key에담고 다음 keys값을 앞으로 땡겨놓는다
 			String methodKey = keyToMethodKey(key); // setUsername
 
@@ -160,7 +160,9 @@ public class Dispatcher implements Filter {
 				}
 				break;
 			}
+
 		}
+
 	}
 	
 	
@@ -188,6 +190,7 @@ public class Dispatcher implements Filter {
 					if(postMapping.value().equals("/login")) {//로그인
 						HttpSession session = request.getSession();
 						session.setAttribute("session", cmRespDto.getData()); 
+						System.out.println(session.getAttribute("session")); //세션 확인
 					}else if(postMapping.value().equals("/logout")) { //로그아웃
 						HttpSession session = request.getSession();
 						session.invalidate();		

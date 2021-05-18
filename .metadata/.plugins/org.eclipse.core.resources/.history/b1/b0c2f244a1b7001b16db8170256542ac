@@ -19,7 +19,7 @@ public class DBConn {
 			
 			return conn;
 		} catch (Exception e) {
-//			System.out.println("DB연결 실패 " + e.getMessage());
+//			
 		}
 		return null;
 	}
