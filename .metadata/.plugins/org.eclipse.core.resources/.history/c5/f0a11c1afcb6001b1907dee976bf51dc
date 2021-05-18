@@ -1,0 +1,6 @@
+
+public class FacebookApplication {
+public static void main(String[] args) {
+	SpringApplication.run(EverytimeApplication.class, args);
+}
+}

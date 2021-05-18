@@ -37,4 +37,5 @@
     <fullyQualifiedTypeName name="anno.PostMapping"/>
     <fullyQualifiedTypeName name="domain.replys.Replys"/>
     <fullyQualifiedTypeName name="repository.LikeDao"/>
+    <fullyQualifiedTypeName name="FacebookApplication"/>
 </qualifiedTypeNameHistroy>

@@ -2,10 +2,7 @@ package web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import anno.GetMapping;
-import domain.user.User;
 import service.BoardService;
 import service.UserService;
 import web.dto.CMRespDto;
